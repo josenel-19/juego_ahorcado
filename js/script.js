@@ -1,8 +1,16 @@
-let pantalla = document.querySelector("canvas"); //300 x 400
-let pincel = pantalla.getContext("2d");
+let pantallaHorca = document.querySelector("#canvasHorca"); //300 x 400
+let pincel = pantallaHorca.getContext("2d");
+
+let pantallaLineas = document.querySelector("#canvasLineas"); //300 x 400
+let pincel2 = pantallaLineas.getContext("2d");
 
 let palabrasSecretas = ["PROGRAMA","JUEGO","WEB","FINAL","SCRIPT","ESTILO","ETIQUETA","EVENTO","LINEA","CODIGO"];
 let palabraSorteada = "";
+let letraSorteadas = [];
+const btnIniciar = document.querySelector("#btnIniciar"); 
+let inputValidaLetra = document.querySelector("#inpValidaLetra");
+
+const letrasValidas = new RegExp("^[a-z]+$", "i");
 
 function dibujarHorca(){
     //dibujando horca
@@ -74,22 +82,70 @@ function dibujarHorca(){
     document.write("hola");
 }
 
+function dibujarLetras(){
+    console.log(letraSorteadas.length);
+    let coordenadaLineaX = 0;
+    for(let i=0; i<letraSorteadas.length; i++){
+        if(inputValidaLetra.value == letraSorteadas[i]){
+            pincel2.beginPath();
+            //pincel.strokeStyle="blue";
+            pincel2.fillStyle="blue";
+            pincel2.font="bold 30px arial";
+            //pincel.strokeText("amore",100,100);
+            pincel2.fillText(letraSorteadas[i],coordenadaLineaX,24);
+            console.log(letraSorteadas[i]);
+            
+        }else{
+            console.log("negativo");
+        }
+        coordenadaLineaX = coordenadaLineaX + 37;
+    }
+    
+}
+
+function dibujarLineas (){
+    pincel2.clearRect(0,0,pantallaLineas.width, pantallaLineas.height);//limpia todo el espacio del canvas
+    let coordenadaLineaX = 0;
+    for(let i=0; i<letraSorteadas.length; i++){
+        pincel2.fillStyle = "blue";
+        pincel2.fillRect(coordenadaLineaX,28,30,2);
+        coordenadaLineaX = coordenadaLineaX + 37;
+    }
+    
+}
+
+
 function capturandoClick (evento){       
-    let posX = evento.x - pantalla.offsetLeft;
-    let posY = evento.y - pantalla.offsetTop; 
+    let posX = evento.x - pantallaLineas.offsetLeft;
+    let posY = evento.y - pantallaLineas.offsetTop; 
     console.log(posX + "," + posY);
 }
 
-dibujarHorca();
-
 function inicarJuego(){
-    palabraSorteada = palabrasSecretas[Math.round(Math.random*palabrasSecretas.length)];//sortea una palabra del array, palabrasSecretas (se hace con .length porque se pueden añadir mas palabras)
+    palabraSorteada = palabrasSecretas[Math.floor(Math.random()*palabrasSecretas.length)];//sortea una palabra del array, palabrasSecretas (se hace con .length porque se pueden añadir mas palabras)
+    letraSorteadas = [];
+    for (let i = 0; i < palabraSorteada.length; i++){
+        letraSorteadas.push(palabraSorteada.charAt(i));
+    }
+    dibujarLineas();
+    console.log(letraSorteadas);
 }
 
+function validarLetras(){
+    inputValidaLetra.value = inputValidaLetra.value.toUpperCase();//convierte letra a mayuscula, ya que javascript ejectuta primero que css
+    if(!letrasValidas.test(inputValidaLetra.value)){
+        console.log("invalido");
+        inputValidaLetra.value="";
+    }else{
+        dibujarLetras();
+        console.log("ok");
+        inputValidaLetra.value="";
+    }
+}
 //function verificarLetra(evento){
     
 //}
-
-pantalla.onclick = capturandoClick;
-
-console.log(palabrasSecretas.length);
+dibujarHorca();
+pantallaLineas.onclick = capturandoClick;
+btnIniciar.onclick = inicarJuego;
+inputValidaLetra.oninput = validarLetras;

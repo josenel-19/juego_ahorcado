@@ -14,11 +14,14 @@
     </header>
     <main>
         <section class="para-el-canvas">
-            <canvas width="300px" height="400px"></canvas>
+            <canvas id="canvasHorca" width="300px" height="400px"></canvas>
+            <div id="espacioLetras"></div>
+            <canvas id="canvasLineas" width="300px" height="40px"></canvas>
         </section>
         <section>
-            <input>
-            <input>
+            <input id="inpValidaLetra">
+            <input style = "color:green" id="inpLetraCorrecta">
+            <input style= "color:red" id="inpLetraIncorrecta">
             <button id="btnIniciar">Iniciar juego</button>
             <button>Nuevo juego</button>
             <button>Desistir</button>
