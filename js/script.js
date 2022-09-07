@@ -83,10 +83,11 @@ function dibujarHorca(){
 }
 
 function dibujarLetras(){
-    console.log(letraSorteadas.length);
+    let textoInput = inputValidaLetra.value;
+    let ultimoCaracter = textoInput.charAt((textoInput.length)-1);
     let coordenadaLineaX = 0;
     for(let i=0; i<letraSorteadas.length; i++){
-        if(inputValidaLetra.value == letraSorteadas[i]){
+        if(ultimoCaracter == letraSorteadas[i]){
             pincel2.beginPath();
             //pincel.strokeStyle="blue";
             pincel2.fillStyle="blue";
@@ -133,13 +134,27 @@ function inicarJuego(){
 
 function validarLetras(){
     inputValidaLetra.value = inputValidaLetra.value.toUpperCase();//convierte letra a mayuscula, ya que javascript ejectuta primero que css
-    if(!letrasValidas.test(inputValidaLetra.value)){
-        console.log("invalido");
-        inputValidaLetra.value="";
+    let textoInput = inputValidaLetra.value;
+    if(!letrasValidas.test(textoInput)){
+        console.log("mal ");
+        textoInput = textoInput.substring(0,(textoInput.length)-1);
+        inputValidaLetra.value = textoInput;
     }else{
-        dibujarLetras();
-        console.log("ok");
-        inputValidaLetra.value="";
+        let ultimoCaracter = textoInput.charAt((textoInput.length)-1);
+        if(textoInput.length == 1){
+            dibujarLetras();
+        } else{
+            for (let i = 0; i<((textoInput.length)-1); i++){
+                if (ultimoCaracter == textoInput.charAt(i)){
+                    console.log("mal repetido");
+                    textoInput = textoInput.substring(0,(textoInput.length)-1);
+                    inputValidaLetra.value = textoInput;
+                    break;
+                } else{
+                    dibujarLetras();
+                }
+            }
+        }
     }
 }
 //function verificarLetra(evento){
