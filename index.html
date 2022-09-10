@@ -10,21 +10,36 @@
 </head>
 <body>
     <header>
-
+        <img src="imagenes/logo-alura.png">
     </header>
     <main>
         <section class="para-el-canvas">
-            <canvas id="canvasHorca" width="300px" height="400px"></canvas>
-            <div id="espacioLetras"></div>
-            <canvas id="canvasLineas" width="300px" height="40px"></canvas>
+            <div id="divCapa1" class="div-capa1">
+                <button id="btnIniciar" class="bt-iniciar">Iniciar juego</button>
+                <button id="btnNuevaPalabra" class="bt-nueva-palabra">Agregar nueva palabra</button>
+            </div>
+
+            <div id="divCapa2" class="div-capa2">
+                <input id="inpAgregarPalabra" class="inp-agrega-palabra" placeholder="Ingrese una palabra">
+                <span>❕</span><label id="lb-informativo" class="lb-informativo"> Max. de 8 letras<label>
+                <button id = "btnGuardar" class="btn-guardar">Guardar y empezar</button>
+                <button id = "btnCancelar" class="btn-cancelar">Cancelar</button>
+            </div>
+
+            <div id="divCapa3" class="div-capa3">
+                
+                <canvas id="canvasHorca" class="canvas-horca" width="300px" height="350px"></canvas>
+                <canvas id="canvasLineas" class="canvas-lineas" width="300px" height="40px"></canvas>
+                <canvas id="canvasLetrasIncorrectas" class="canvas-letras-incorrectas" width="300px" height="40px"></canvas>
+                <input id="inpValidaLetra" class="inp-validar-letras">
+                <button id="btnNuevo" class="btn-capa3">Nuevo juego</button>
+                <button id="btnDesistir" class="btn-capa3">Desistir</button>
+            </div>
+            
+            
         </section>
         <section>
-            <input id="inpValidaLetra">
-            <input style = "color:green" id="inpLetraCorrecta">
-            <input style= "color:red" id="inpLetraIncorrecta">
-            <button id="btnIniciar">Iniciar juego</button>
-            <button>Nuevo juego</button>
-            <button>Desistir</button>
+            
         </section>
     </main>
     <script src="js/script.js"></script>
