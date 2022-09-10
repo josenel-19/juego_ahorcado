@@ -69,8 +69,11 @@ span{
 
 .inp-validar-letras{
     display: block;
-    width: 16px;
+    width: 20rem;
     margin: 10px auto;
+    background-color: #F3F5FC;
+    text-align: center;
+    border-style: none;
 }
 .btn-capa3{
     display: block;

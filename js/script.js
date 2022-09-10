@@ -5,6 +5,7 @@ const btnIniciar = document.querySelector("#btnIniciar");
 
 const div2 = document.querySelector("#divCapa2");
 const inpAgregaPalabra = document.querySelector("#inpAgregarPalabra");
+const lbInformarivo = document.querySelector("#lb-informativo");
 const btnGuardar = document.querySelector("#btnGuardar");
 const btnCancelar = document.querySelector("#btnCancelar");
 
@@ -118,7 +119,7 @@ function dibujarLetras(){
         if(ultimoCaracter == (letraSorteadas[i])){
             pincel2.beginPath();
             //pincel.strokeStyle="blue";
-            pincel2.fillStyle="blue";
+            pincel2.fillStyle="#0A3871";
             pincel2.textAling="center";
             pincel2.font="30px arial";
             //pincel.strokeText("amore",100,100);
@@ -134,7 +135,7 @@ function dibujarLetras(){
         let ancho = (letrasIncorrectas.length*19);
         pantallaLetraIncorrecta.width = ancho;
         pincel3.beginPath();
-        pincel3.fillStyle="blue";
+        pincel3.fillStyle="#0A3871";
         pincel3.textAling="center";
         pincel3.font="24px arial";
         pincel3.fillText(letrasIncorrectas,0,26);
@@ -155,7 +156,7 @@ function dibujarLineas (){
     }
     pantallaLineas.width=ancho;
     for(let i=0; i<letraSorteadas.length; i++){
-        pincel2.fillStyle = "blue";
+        pincel2.fillStyle = "#0A3871";
         pincel2.fillRect(coordenadaLineaX,28,30,2);
         coordenadaLineaX = coordenadaLineaX + 37; 
     }
@@ -165,6 +166,7 @@ function inicarJuego(){
     div1.style.display="none";
     div2.style.display="none";
     div3.style.display="block";
+    btnNuevo.style.display="block";
     limpiarPantalla();
     textoInput="";
     intentos=0;
@@ -182,7 +184,6 @@ function inicarJuego(){
 function validarLetras(){
     inputValidaLetra.value = inputValidaLetra.value.toUpperCase();//convierte letra a mayuscula, ya que javascript ejectuta primero que css
     textoInput = textoInput + inputValidaLetra.value;
-    console.log(textoInput);
     let ultimoCaracter = textoInput.charAt((textoInput.length)-1);
     let letraRepetida = false;
     inputValidaLetra.value="";
@@ -222,14 +223,56 @@ function limpiarPantalla(){
 
 function verificarGanador (){
     if (letrasCompletas == letraSorteadas.length){
-        alert("usted ganó");
+        Swal.fire({
+            title: "¡FELICIDADES!",
+            text: "usted ganó",
+            icon: "success"
+        });
     }else if(intentos == 8){
-        alert("usted perdió");
+        Swal.fire({
+            title: "FIN DEL JUEGO",
+            text: "usted perdió, la palabra correcta era " + palabraSorteada,
+            icon: "error"
+        });
     }
 }
-//function verificarLetra(evento){
-    
-//}
+
+function irPantallaInicial (){
+    div2.style.display="none";
+    div3.style.display="none";
+    div1.style.display="block";
+    palabrasSecretas = ["PROGRAMA","JUEGO","WEB","FINAL","SCRIPT","ESTILO","ETIQUETA","EVENTO","LINEA","CODIGO"];
+}
+
+function irPantalla2(){
+    div2.style.display="block";
+    div3.style.display="none";
+    div1.style.display="none";
+    inpAgregaPalabra.value="";
+    inpAgregaPalabra.placeholder="Ingrese una palabra";
+}
+function verificarNuevaPalabra(){
+    if((!letrasValidas.test(inpAgregaPalabra.value)) || inpAgregaPalabra.value.length>8){
+        inpAgregaPalabra.value = inpAgregaPalabra.value.substring(0,((inpAgregaPalabra.value).length-1));
+        lbInformarivo.style.color = "red";
+    }else{
+        inpAgregaPalabra.value = inpAgregaPalabra.value.toUpperCase();
+        lbInformarivo.style.color="#495057";
+    }
+}
+function guardarNuevaPalabra(){
+    palabrasSecretas = [inpAgregaPalabra.value];
+    inicarJuego();
+    btnNuevo.style.display="none";
+}
+
+
 btnIniciar.onclick = inicarJuego;
+inpAgregaPalabra.oninput = verificarNuevaPalabra;
 btnNuevo.onclick = inicarJuego;
+btnDesistir.onclick = irPantallaInicial;
+btnNuevaPalabra.onclick = irPantalla2;
+btnGuardar.onclick= guardarNuevaPalabra;
 inputValidaLetra.oninput = validarLetras;
+btnCancelar.onclick = irPantallaInicial;
+btnDesistir.onclick = irPantallaInicial;
