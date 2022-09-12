@@ -37,9 +37,9 @@ let finalRecorridoInput = 0;//variable para incrmentar y validar el final del re
 let intentos = 0;  // intentos fallidos al llegar a 8 se pierde el juego (usado para validar perdedor)
 let letrasCompletas = 0; // se incrementa cuando se pinta una letra de la palabra escogida (usada para vaalidar ganador)
 
-let letrasIncorrectas = "";
+let letrasIncorrectas = ""; //para capturar las letras incorrectas que se dibujaran en el canvas
 
-function dibujarHorca(){
+function dibujarHorca(){ // dibuja todo el recuadro de la horca y el muñeco
     if(intentos == 1){
         pincel.fillStyle = "#8B4A0A";
         pincel.fillRect(0,345,300,5); // dibuja base horizontal baja - coordenada x, coordenada y, tamaño x, tamaño y.
@@ -113,12 +113,12 @@ function dibujarHorca(){
     }
 }
 
-function dibujarLetras(){
+function dibujarLetras(){ //dibuja letras tanto correctas como incorrectas
     let ultimoCaracter = textoInput.charAt((textoInput.length)-1);
     let coordenadaLineaX = 0;
     let letraCorrecta = false;
     let i = 0;
-    for (let i=0; i<letraSorteadas.length; i++){
+    for (let i=0; i<letraSorteadas.length; i++){ //reccorre cada letra de la palabra sorteada y compara si hay igualdad y dibuja la letra que coincida. (puede coincidir varias letras, se puede dibujar mas de una)
         if(ultimoCaracter == (letraSorteadas[i])){
             pincel2.beginPath();
             //pincel.strokeStyle="blue";
@@ -128,12 +128,12 @@ function dibujarLetras(){
             //pincel.strokeText("amore",100,100);
             pincel2.fillText(letraSorteadas[i],coordenadaLineaX,24);
             letraCorrecta=true;
-            letrasCompletas = letrasCompletas + 1;
+            letrasCompletas = letrasCompletas + 1; //variable que verifica ganador
         }
-        coordenadaLineaX = coordenadaLineaX + 38;
+        coordenadaLineaX = coordenadaLineaX + 38; //coordenada horizontal(x) de la letra.
     }
 
-    if(letraCorrecta==false && finalRecorridoInput==true){
+    if(letraCorrecta==false && finalRecorridoInput==true){ //dibuja letra incorrecta solo al finalizar el reccorrido de todas las letras, ya que solo se dibuja una letra incorrecta por cada recorrido finalizado.
         letrasIncorrectas = letrasIncorrectas + ultimoCaracter;
         let ancho = (letrasIncorrectas.length*19);
         pantallaLetraIncorrecta.width = ancho;
@@ -142,7 +142,7 @@ function dibujarLetras(){
         pincel3.textAling="center";
         pincel3.font="24px arial";
         pincel3.fillText(letrasIncorrectas,0,26);
-        intentos = intentos + 1; 
+        intentos = intentos + 1; //valida perdedor
         dibujarHorca();
     }
 
@@ -154,10 +154,12 @@ function dibujarLineas (){
     pincel2.clearRect(0,0,pantallaLineas.width, pantallaLineas.height);//limpia todo el espacio del canvas
     let ancho = 0;
     let coordenadaLineaX = 0;
-    for(let inc=0; inc<letraSorteadas.length; inc++){
+    for(let inc=0; inc<letraSorteadas.length; inc++){ //recorrido del largo de la palabra sorteada, para saber el ancho del canvas
         ancho = ancho + 37;
     }
     pantallaLineas.width=ancho;
+
+    //dibuja cada linea conforme al largo de la palabra sorteada
     for(let i=0; i<letraSorteadas.length; i++){
         pincel2.fillStyle = "#0A3871";
         pincel2.fillRect(coordenadaLineaX,28,30,2);
@@ -165,7 +167,7 @@ function dibujarLineas (){
     }
 }
 
-function inicarJuego(){
+function inicarJuego(){ // se dan los parametros iniciales
     div1.style.display="none";
     div2.style.display="none";
     div3.style.display="block";
@@ -180,30 +182,29 @@ function inicarJuego(){
     letrasIncorrectas="";
     palabraSorteada = palabrasSecretas[Math.floor(Math.random()*palabrasSecretas.length)];//sortea una palabra del array, palabrasSecretas (se hace con .length porque se pueden añadir mas palabras)
     letraSorteadas = [];
-    for (let i = 0; i < palabraSorteada.length; i++){
+    for (let i = 0; i < palabraSorteada.length; i++){ //se llena variable en un array con cada letra de la palabra sorteada
         letraSorteadas.push(palabraSorteada.charAt(i));
     }
     dibujarLineas();
-    console.log(letraSorteadas);
 }
 
-function validarLetras(){
+function validarLetras(){ // valida las letras introducidas en el juego
     inputValidaLetra.value = inputValidaLetra.value.toUpperCase();//convierte letra a mayuscula, ya que javascript ejectuta primero que css
-    textoInput = textoInput + inputValidaLetra.value;
+    textoInput = textoInput + inputValidaLetra.value; //variable que va concatenado las letras y con esta se validan las letras repetidas
     let ultimoCaracter = textoInput.charAt((textoInput.length)-1);
     let letraRepetida = false;
     inputValidaLetra.value="";
-    if(!letrasValidas.test(ultimoCaracter)){
+    if(!letrasValidas.test(ultimoCaracter)){ //si la letra no es valida, borra esa letra (ultima)
         textoInput = textoInput.substring(0,(textoInput.length)-1);
     }else{
 
         finalRecorridoInput = false;
     
-        if(textoInput.length == 1){
-            finalRecorridoInput = true;
+        if(textoInput.length == 1){ 
+            finalRecorridoInput = true; //util para dibujar palabra incorecta
             dibujarLetras();
         } else{
-            for (let inc = 0; inc<((textoInput.length)-1); inc++){
+            for (let inc = 0; inc<((textoInput.length)-1); inc++){ //recorre el texto almacenado y compara las letras
                 if(inc ==((textoInput.length)-2)){
                     finalRecorridoInput = true;
                 } else if (ultimoCaracter == textoInput.charAt(inc)){
@@ -212,7 +213,7 @@ function validarLetras(){
                     break;
                 }
             }
-            if(letraRepetida==false){
+            if(letraRepetida==false){ // si no hay letras repetidas se procede a dibujar letras
                 dibujarLetras();
             }
         }
@@ -265,6 +266,7 @@ function irPantalla2(){
     inpAgregaPalabra.placeholder="Ingrese una palabra";
 }
 function verificarNuevaPalabra(){
+    //compara con letras validas y con el maximo de letras permitidas por palabra
     if((!letrasValidas.test(inpAgregaPalabra.value)) || inpAgregaPalabra.value.length>8){
         inpAgregaPalabra.value = inpAgregaPalabra.value.substring(0,((inpAgregaPalabra.value).length-1));
         lbInformarivo.style.color = "red";
@@ -274,7 +276,7 @@ function verificarNuevaPalabra(){
     }
 }
 function guardarNuevaPalabra(){
-    palabrasSecretas = [inpAgregaPalabra.value];
+    palabrasSecretas = [inpAgregaPalabra.value];// palabra secreta toma valor de la nueva palabra, es decir solo una palabra va estar disponible para el juego.
     inicarJuego();
     btnNuevo.style.background="#D1CECD";
     btnNuevo.disabled = true;
