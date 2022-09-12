@@ -1,4 +1,4 @@
-
+//se toman elemntos del html
 const div1 = document.querySelector("#divCapa1");
 const btnNuevaPalabra = document.querySelector("#btnNuevaPalabra");
 const btnIniciar = document.querySelector("#btnIniciar");
@@ -20,19 +20,22 @@ const btnNuevo = document.querySelector("#btnNuevo");
 const btnDesistir = document.querySelector("#btnDesistir");
 let inputValidaLetra = document.querySelector("#inpValidaLetra");
 
-let palabrasSecretas = ["PROGRAMA","JUEGO","WEB","FINAL","SCRIPT","ESTILO","ETIQUETA","EVENTO","LINEA","CODIGO"];
+//variables para manejo y validacion de palabras y letras escogidas
+let palabrasSecretasIniciales = ["PROGRAMA","JUEGO","WEB","FINAL","SCRIPT","ESTILO","ETIQUETA","EVENTO","LINEA","CODIGO"];
+let palabrasSecretas = palabrasSecretasIniciales;
 let palabraSorteada = "";
 let letraSorteadas = [];
 
-let textoInput = "";
+let textoInput = ""; // tomara el texto 
 
-const letrasValidas = new RegExp("^[a-z]+$", "i");
+const letrasValidas = new RegExp("^[a-z]+$", "i"); //variable de letras permitidas
+
 let coorXletraInc = 0; //coordenada x para las letras incorrectas
 
-let finalRecorridoInput = 0;
+let finalRecorridoInput = 0;//variable para incrmentar y validar el final del recoorido de las letras de la palbra escogida, para luego saber si la letra escogida es valida o no 
 
-let intentos = 0;
-let letrasCompletas = 0;
+let intentos = 0;  // intentos fallidos al llegar a 8 se pierde el juego (usado para validar perdedor)
+let letrasCompletas = 0; // se incrementa cuando se pinta una letra de la palabra escogida (usada para vaalidar ganador)
 
 let letrasIncorrectas = "";
 
@@ -166,7 +169,10 @@ function inicarJuego(){
     div1.style.display="none";
     div2.style.display="none";
     div3.style.display="block";
-    btnNuevo.style.display="block";
+    inputValidaLetra.disabled=false;
+    inputValidaLetra.focus();
+    btnNuevo.disabled=false;
+    btnNuevo.style.background="#0A3871";
     limpiarPantalla();
     textoInput="";
     intentos=0;
@@ -228,12 +234,18 @@ function verificarGanador (){
             text: "usted ganó",
             icon: "success"
         });
+        inputValidaLetra.disabled=true;
+        btnNuevo.disabled=false;
+        btnNuevo.style.background="#0A3871";
     }else if(intentos == 8){
         Swal.fire({
             title: "FIN DEL JUEGO",
             text: "usted perdió, la palabra correcta era " + palabraSorteada,
             icon: "error"
         });
+        inputValidaLetra.disabled=true;
+        btnNuevo.disabled=false;
+        btnNuevo.style.background="#0A3871";
     }
 }
 
@@ -241,13 +253,14 @@ function irPantallaInicial (){
     div2.style.display="none";
     div3.style.display="none";
     div1.style.display="block";
-    palabrasSecretas = ["PROGRAMA","JUEGO","WEB","FINAL","SCRIPT","ESTILO","ETIQUETA","EVENTO","LINEA","CODIGO"];
+    palabrasSecretas = palabrasSecretasIniciales;
 }
 
 function irPantalla2(){
     div2.style.display="block";
     div3.style.display="none";
     div1.style.display="none";
+    inpAgregaPalabra.focus();
     inpAgregaPalabra.value="";
     inpAgregaPalabra.placeholder="Ingrese una palabra";
 }
@@ -263,7 +276,8 @@ function verificarNuevaPalabra(){
 function guardarNuevaPalabra(){
     palabrasSecretas = [inpAgregaPalabra.value];
     inicarJuego();
-    btnNuevo.style.display="none";
+    btnNuevo.style.background="#D1CECD";
+    btnNuevo.disabled = true;
 }
 
 

@@ -1,103 +1,241 @@
 body{
     background-color: #F3F5FC;
 }
-header{
-    margin: 20px 20px;
-}
 
-.bt-iniciar{
-    width: 85%;
-    height: 105px;
-    margin: 170px 7.5% 20px 7.5%;
-    border-radius: 24px;
-    background-color: #0A3871;
-    color: white;
-}
-.bt-nueva-palabra{
-    background-color: #F3F5FC;
-    width: 74%;
-    height: 67px;
-    margin: 0px 13% 0px 13%;
-    border-radius: 24px;
-    border-color: #0A3871;
-    color: #0A3871;
-}
-
-.inp-agrega-palabra{
-    display: block;
-    width: 84%;
-    height: 48px;
-    margin: 110px 7% 210px 7%;
-    font-size: 32px;
-    color: #0A3871;
-    background-color: #F3F5FC;
-}
-
-span{
-    margin-left:6%;
-    color: #495057;
-}
-.lb-informativo{
-    color: #495057;
-}
-
-.btn-guardar{
-    display: block;
-    width: 90%;
-    height: 67px;
-    margin: 16px 5% 24px 5%;
-    border-radius: 24px;
-}
-
-.btn-cancelar{
-    display: block;
-    width: 90%;
-    height: 67px;
-    margin: 0 5% 24px 5%;
-    border-radius: 24px;
-}
-
-
-.canvas-horca{
-    display: block;
-    margin: 20px auto 30px auto;
-}
-.canvas-lineas, .canvas-letras-incorrectas{
-    display: block;
-    margin: 0 auto;
-}
-
-.inp-validar-letras{
-    display: block;
-    width: 20rem;
-    margin: 10px auto;
-    background-color: #F3F5FC;
-    text-align: center;
-    border-style: none;
-}
-.btn-capa3{
-    display: block;
-    width: 90%;
-    margin: 10px auto;
-    height: 67px;
-    border-radius: 24px;
-}
-
-.div-capa2 button:first-child, .div-capa3 button:nth-child(5n){
-    background-color: #0A3871;
-    color: white;
-}
-
-.div-capa2 button:nth-child(2n), .div-capa3 button:nth-child(6n){
-    border-color: #0A3871;
-    color: #0A3871;
-    background-color: #F3F5FC;
-}
 .div-capa2{
     display: none;
 }
 .div-capa3{
     display: none;
 }
+.inp-agrega-palabra{
+    border-style: none;
+    outline: none;
+}
+.inp-validar-letras{
+    border-style: none;
+    outline: none;
+}
+
+@media all and (min-width: 100px){
+    header{
+        margin: 6%;
+    }
+    .bt-iniciar{
+        display: block;
+        width: 85%;
+        height: 105px;
+        margin: 170px auto 20px auto;
+        border-radius: 24px;
+        background-color: #0A3871;
+        color: white;
+    }
+    .bt-nueva-palabra{
+        display: block;
+        width: 74%;
+        height: 67px;
+        margin: 0px auto 0px auto;
+        border-radius: 24px;
+        background-color: #F3F5FC;
+        border-color: #0A3871;
+        color: #0A3871;
+    }
+    
+    .inp-agrega-palabra{
+        display: block;
+        width: 84%;
+        height: 48px;
+        margin: 110px 6% 210px 6%;
+        font-size: 32px;
+        color: #0A3871;
+        background-color: #F3F5FC;
+    }
+    
+    .lb-informativo{
+        margin-left:6%;
+        color: #495057;
+    }
+    
+    .btn-guardar{
+        display: block;
+        width: 90%;
+        height: 67px;
+        margin: 16px 5% 24px 5%;
+        border-radius: 24px;
+        background-color: #0A3871;
+        color: white;
+        border-color: #0A3871;
+    }
+    
+    .btn-cancelar{
+        display: block;
+        width: 90%;
+        height: 67px;
+        margin: 0 5% 24px 5%;
+        border-radius: 24px;
+        background-color: #F3F5FC;
+        border-color: #0A3871;
+        color: #0A3871;
+    }
+    
+    
+    .canvas-horca{
+        display: block;
+        margin: 20px auto 30px auto;
+    }
+    .canvas-lineas, .canvas-letras-incorrectas{
+        display: block;
+        margin: 0 auto;
+    }
+    
+    .inp-validar-letras{
+        display: block;
+        width: 50%;
+        margin: 10px auto;
+        background-color: #F3F5FC;
+        text-align: center;
+        border-style: none;
+    }
+    .btn-capa3{
+        display: block;
+        width: 90%;
+        height: 67px;
+        border-radius: 24px;
+    }
+    
+    .div-capa2 button:first-child, .div-capa3 button:nth-child(5n){
+        background-color: #0A3871;
+        color: white;
+        margin: 10px 5%;
+    }
+    
+    .div-capa2 button:nth-child(2n), .div-capa3 button:nth-child(6n){
+        border-color: #0A3871;
+        color: #0A3871;
+        background-color: #F3F5FC;
+        margin: 10px auto;
+    }  
+}
+
+@media all and (min-width: 640px){
+    .canvas-horca{
+        margin-top: 190px;
+    }
+    .bt-iniciar{
+        width: 50%;
+        margin: 400px auto 20px auto;
+
+    }
+    .bt-nueva-palabra{
+        width: 48%;
+        margin: 0px auto 0px auto;
+    }
+
+    .inp-agrega-palabra{
+        display: block;
+        width: 60%;
+        margin: 150px 0 600px 6%;
+    }
+    
+    .lb-informativo{
+        display: block;
+        margin: 0 40% 0 6%;
+        color: #495057;
+    }
+    
+    .btn-guardar{
+        display:inline-block;
+        width: 41.7%;
+        margin: 16px 2% 0px 6%;
+    }
+    .btn-cancelar{
+        display:inline-block;
+        width: 41.7%;
+        margin: 16px 6% 0px 2%;
+    }
+    .btn-capa3{
+        display: inline-block;
+        width: 41.7%;
+    }
+    
+    .div-capa3 button:nth-child(1n){
+        margin: 80px 2% 0px 6%;
+    }
+    
+    .div-capa3 button:nth-child(2n){
+        margin: 80px 6% 0px 2%;
+    } 
+    
+}
+
+@media all and (min-width: 992px){
+    header{
+        margin: 3% 6%;
+    }
+    .bt-iniciar{
+        width: 22%;
+        margin: 10% auto 38px auto;
+
+    }
+    .bt-nueva-palabra{
+        width: 20%;
+        margin: 0px auto 0px auto;
+    }
+
+    .inp-agrega-palabra{
+        display: block;
+        width: 23.7%;
+        margin: 120px 0 150px 24%;
+    }
+    
+    .lb-informativo{
+        display: block;
+        margin: 0 0 0 24%;
+        color: #495057;
+    }
+    
+    .btn-guardar{
+        display:inline-block;
+        width: 23.7%;
+        margin: 16px 2% auto 24%;
+    }
+
+    .btn-cancelar{
+        display:inline-block;
+        width: 23.7%;
+        margin: 16px 24% auto 2%;
+    }
+
+    .canvas-horca{
+        margin-top: 0px;
+    }
+    .inp-validar-letras{
+        display: block;
+        width: 20%;
+    }
+    .btn-capa3{
+        display: inline-block;
+        width: 23.7%;
+    }
+    
+    .div-capa3 button:nth-child(1n){
+        margin: 16px 2% 0px 24%;
+    }
+    
+    .div-capa3 button:nth-child(2n){
+        margin: 16px 24% 0px 2%;
+    } 
+}
+.principal button{
+    transition: 0.5s;
+}
+.principal button:hover{
+    transform: scale(1.02);
+    border-radius: 20px;
+}
+.principal button:active{
+    transform: translateY(20px);
+}
+
 
 
