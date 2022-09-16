@@ -1,11 +1,11 @@
 body{
     background-color: #F3F5FC;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    height: 100%;
 }
 
 .contenido{
     position: relative;
+    min-height: 100vh;
 }
 
 main{
@@ -28,7 +28,7 @@ main{
 }
 
 footer{
-    position: fixed;
+    position: absolute;
     left: 0;
     bottom: 0;
     background-color: rgba(10,56,113,0.2);
@@ -43,8 +43,9 @@ footer div{
 .par-dev{
     display: inline;
     color:#0A3871;
-    font-size: 1em;
+    font-size: 0.8em;
     vertical-align:middle;
+    max-height: 1em;
 }
 .img-footer{
     display: inline;
