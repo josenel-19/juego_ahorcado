@@ -40,92 +40,85 @@ let letrasCompletas = 0; // se incrementa cuando se pinta una letra de la palabr
 let letrasIncorrectas = ""; //para capturar las letras incorrectas que se dibujaran en el canvas
 
 function dibujarHorca(){ // dibuja todo el recuadro de la horca y el muñeco
+    const colorHorca="#8B4A0A";
+    const colorMuneco = "#0A3871";
+    const colorFondoCabeza ="#F3F5FC";
     if(intentos == 1){
-        pincel.fillStyle = "#8B4A0A";
-        pincel.fillRect(0,345,300,5); // dibuja base horizontal baja - coordenada x, coordenada y, tamaño x, tamaño y.
-        pincel.fillRect(75,5,5,350); // dibuja base vertical
+        pincel.beginPath();
+        pincel.lineWidth=5;
+        pincel.moveTo(0,197.5);
+        pincel.lineTo(300,197.5);
+        pincel.strokeStyle = colorHorca;
+        pincel.stroke();
+        pincel.beginPath();
+        pincel.moveTo(75,200);
+        pincel.lineTo(75,2.5);
+        pincel.stroke();
+
     }if(intentos == 2){
-        pincel.fillStyle = "#8B4A0A";
-        pincel.fillRect(75,5,150,5); // dibuja base horizontal alta
-        pincel.fillRect(220,5,5,70); // dibuja linea de base horizontal alta a cabeza
+        pincel.beginPath(); // dibuja base horizontal alta
+        pincel.moveTo(72.5,2.5);
+        pincel.lineTo(200,2.5);
+        pincel.stroke();
+        pincel.beginPath(); // // dibuja linea de base horizontal alta a cabeza
+        pincel.moveTo(200,0);
+        pincel.lineTo(200,25);
+        pincel.stroke();
     }if(intentos == 3){
         //dibujando cabeza
-        pincel.fillStyle = "#0A3871";
+        pincel.fillStyle = colorMuneco;
         pincel.beginPath(); //inicia nueva ruta de dibujo
-        pincel.arc(220,100, 25, 0, 2*3.14 ); //coordenas x, coordenada y, radio, constante 0, constante pi)
+        pincel.arc(200,45, 20, 0, 2*3.14 ); //coordenas x, coordenada y, radio, constante 0, constante pi)
         pincel.fill();
-        pincel.fillStyle = "#F3F5FC";
+        pincel.fillStyle = colorFondoCabeza;
         pincel.beginPath();
-        pincel.arc(220,100, 20, 0, 2*3.14 ); //coordenas x, coordenada y, radio, constante 0, constante pi)
+        pincel.arc(200,45, 15, 0, 2*3.14 ); //coordenas x, coordenada y, radio, constante 0, constante pi)
         pincel.fill();
     }if(intentos == 4){
         //dibujando tronco
-        pincel.fillStyle = "#0A3871";
-        pincel.fillRect(220,125,5,150);
+        pincel.fillStyle = colorMuneco;
+        pincel.fillRect(197.5,62.5,5,80);
     }if(intentos == 5){
         //dibujando brazo izquierdo
         pincel.beginPath();
-        pincel.moveTo(225,150);
-        pincel.lineTo(180,205);
-        pincel.lineTo(185,205);
-        pincel.fill();
-        pincel.beginPath();
-        pincel.moveTo(180,205);
-        pincel.lineTo(220,150);
-        pincel.lineTo(225,150);
-        pincel.fill();        
+        pincel.strokeStyle = colorMuneco;
+        pincel.moveTo(200,62);
+        pincel.lineTo(170,92);
+        pincel.stroke();
     }if(intentos == 6){
         //dibujando brazo derecho
         pincel.beginPath();
-        pincel.moveTo(225,150);
-        pincel.lineTo(270,205);
-        pincel.lineTo(275,205);
-        pincel.fill();
-        pincel.beginPath();
-        pincel.moveTo(270,205);
-        pincel.lineTo(220,150);
-        pincel.lineTo(225,150);
-        pincel.fill();
+        pincel.moveTo(200,62);
+        pincel.lineTo(230,92);
+        pincel.stroke();
     }if(intentos == 7){
         //dibujando pierna izquierda
         pincel.beginPath();
-        pincel.moveTo(225,275);
-        pincel.lineTo(180,330);
-        pincel.lineTo(185,330);
-        pincel.fill();
-        pincel.beginPath();
-        pincel.moveTo(180,330);
-        pincel.lineTo(220,275);
-        pincel.lineTo(225,275);
-        pincel.fill();
+        pincel.moveTo(200,142);
+        pincel.lineTo(170,172);
+        pincel.stroke();
     }if(intentos == 8){
         //dibujando pierna derecha
         pincel.beginPath();
-        pincel.moveTo(225,275);
-        pincel.lineTo(270,330);
-        pincel.lineTo(275,330);
-        pincel.fill();
-        pincel.beginPath();
-        pincel.moveTo(270,330);
-        pincel.lineTo(220,275);
-        pincel.lineTo(225,275);
-        pincel.fill();
+        pincel.moveTo(200,142);
+        pincel.lineTo(230,172);
+        pincel.stroke();
+
     }
 }
 
 function dibujarLetras(){ //dibuja letras tanto correctas como incorrectas
     let ultimoCaracter = textoInput.charAt((textoInput.length)-1);
-    let coordenadaLineaX = 0;
     let letraCorrecta = false;
+    let coordenadaLineaX = 10;
     let i = 0;
     for (let i=0; i<letraSorteadas.length; i++){ //reccorre cada letra de la palabra sorteada y compara si hay igualdad y dibuja la letra que coincida. (puede coincidir varias letras, se puede dibujar mas de una)
         if(ultimoCaracter == (letraSorteadas[i])){
             pincel2.beginPath();
             //pincel.strokeStyle="blue";
             pincel2.fillStyle="#0A3871";
-            pincel2.textAling="center";
             pincel2.font="30px arial";
-            //pincel.strokeText("amore",100,100);
+            pincel2.textAlign="center";
             pincel2.fillText(letraSorteadas[i],coordenadaLineaX,24);
             letraCorrecta=true;
             letrasCompletas = letrasCompletas + 1; //variable que verifica ganador
@@ -135,13 +128,13 @@ function dibujarLetras(){ //dibuja letras tanto correctas como incorrectas
 
     if(letraCorrecta==false && finalRecorridoInput==true){ //dibuja letra incorrecta solo al finalizar el reccorrido de todas las letras, ya que solo se dibuja una letra incorrecta por cada recorrido finalizado.
         letrasIncorrectas = letrasIncorrectas + ultimoCaracter;
-        let ancho = (letrasIncorrectas.length*19);
+        let ancho = (letrasIncorrectas.length*30);
         pantallaLetraIncorrecta.width = ancho;
         pincel3.beginPath();
         pincel3.fillStyle="#0A3871";
-        pincel3.textAling="center";
         pincel3.font="24px arial";
-        pincel3.fillText(letrasIncorrectas,0,26);
+        pincel3.textAlign="center";
+        pincel3.fillText(letrasIncorrectas,(ancho/2),26); //pinta letra en la mitad del canvas
         intentos = intentos + 1; //valida perdedor
         dibujarHorca();
     }
@@ -200,20 +193,22 @@ function validarLetras(){ // valida las letras introducidas en el juego
 
         finalRecorridoInput = false;
     
-        if(textoInput.length == 1){ 
+        if(textoInput.length === 1){ //condicional para primera letra, ya que no se compara.
             finalRecorridoInput = true; //util para dibujar palabra incorecta
             dibujarLetras();
         } else{
             for (let inc = 0; inc<((textoInput.length)-1); inc++){ //recorre el texto almacenado y compara las letras
-                if(inc ==((textoInput.length)-2)){
+                if(inc ===((textoInput.length)-2)){ //valida que el final del recorrido sea hasta la penultima letra
                     finalRecorridoInput = true;
-                } else if (ultimoCaracter == textoInput.charAt(inc)){
+                }
+                if (ultimoCaracter === textoInput.charAt(inc)){ //si la letra coincide corta es letra de la variable que las almacena
                     textoInput = textoInput.substring(0,(textoInput.length)-1);
                     letraRepetida = true;
                     break;
                 }
             }
-            if(letraRepetida==false){ // si no hay letras repetidas se procede a dibujar letras
+            if(letraRepetida===false){ // si no hay letras repetidas se procede a dibujar letras
+                console.log(textoInput);
                 dibujarLetras();
             }
         }
@@ -276,10 +271,19 @@ function verificarNuevaPalabra(){
     }
 }
 function guardarNuevaPalabra(){
-    palabrasSecretas = [inpAgregaPalabra.value];// palabra secreta toma valor de la nueva palabra, es decir solo una palabra va estar disponible para el juego.
-    inicarJuego();
-    btnNuevo.style.background="#D1CECD";
-    btnNuevo.disabled = true;
+    if ((inpAgregaPalabra.value == "") || (inpAgregaPalabra.value.length<3)){
+        Swal.fire({
+            title: "ERROR",
+            text: "Una palabra tiene mínimo 3 letras ",
+            icon: "error"
+        })
+    }else{
+        palabrasSecretas = [inpAgregaPalabra.value];// palabra secreta toma valor de la nueva palabra, es decir solo una palabra va estar disponible para el juego.
+        inicarJuego();
+        btnNuevo.style.background="#D1CECD";
+        btnNuevo.disabled = true;
+    }
+    
 }
 
 

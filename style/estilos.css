@@ -1,5 +1,15 @@
 body{
     background-color: #F3F5FC;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 100%;
+}
+
+.contenido{
+    position: relative;
+}
+
+main{
+    padding-bottom: 65px;
 }
 
 .div-capa2{
@@ -16,6 +26,33 @@ body{
     border-style: none;
     outline: none;
 }
+
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(10,56,113,0.2);
+    width: 100%;
+    height: 60px;
+}
+footer div{
+    display: block;
+    width:fit-content;
+    margin: 15px auto;
+}
+.par-dev{
+    display: inline;
+    color:#0A3871;
+    font-size: 1em;
+    vertical-align:middle;
+}
+.img-footer{
+    display: inline;
+    width: 30px;
+    height: 30px; 
+    vertical-align: middle;
+}
+
 
 @media all and (min-width: 100px){
     header{
@@ -34,7 +71,7 @@ body{
         display: block;
         width: 74%;
         height: 67px;
-        margin: 0px auto 0px auto;
+        margin: 0px auto 70px auto;
         border-radius: 24px;
         background-color: #F3F5FC;
         border-color: #0A3871;
@@ -46,7 +83,7 @@ body{
         width: 84%;
         height: 48px;
         margin: 110px 6% 210px 6%;
-        font-size: 32px;
+        font-size: 25px;
         color: #0A3871;
         background-color: #F3F5FC;
     }
@@ -54,6 +91,7 @@ body{
     .lb-informativo{
         margin-left:6%;
         color: #495057;
+        font-size: 0.7rem;
     }
     
     .btn-guardar{
@@ -71,7 +109,6 @@ body{
         display: block;
         width: 90%;
         height: 67px;
-        margin: 0 5% 24px 5%;
         border-radius: 24px;
         background-color: #F3F5FC;
         border-color: #0A3871;
@@ -81,7 +118,7 @@ body{
     
     .canvas-horca{
         display: block;
-        margin: 20px auto 30px auto;
+        margin: 10px auto 30px auto;
     }
     .canvas-lineas, .canvas-letras-incorrectas{
         display: block;
@@ -103,68 +140,70 @@ body{
         border-radius: 24px;
     }
     
-    .div-capa2 button:first-child, .div-capa3 button:nth-child(5n){
+    .div-capa2 button:nth-child(1n), .div-capa3 button:nth-child(1n){
         background-color: #0A3871;
         color: white;
-        margin: 10px 5%;
+        margin: 10px 5% 16px 5%;
     }
     
-    .div-capa2 button:nth-child(2n), .div-capa3 button:nth-child(6n){
+    .div-capa2 button:nth-child(2n), .div-capa3 button:nth-child(2n){
         border-color: #0A3871;
         color: #0A3871;
         background-color: #F3F5FC;
-        margin: 10px auto;
+        margin: 10px auto 70px auto;
     }  
 }
 
 @media all and (min-width: 640px){
-    .canvas-horca{
-        margin-top: 190px;
-    }
     .bt-iniciar{
         width: 50%;
-        margin: 400px auto 20px auto;
+        margin: 170px auto 20px auto;
 
     }
     .bt-nueva-palabra{
         width: 48%;
-        margin: 0px auto 0px auto;
+        margin: 0px auto 70px auto;
     }
 
     .inp-agrega-palabra{
         display: block;
         width: 60%;
-        margin: 150px 0 600px 6%;
+        margin: 150px 0 150px 6%;
     }
     
     .lb-informativo{
         display: block;
         margin: 0 40% 0 6%;
         color: #495057;
+        font-size: 1em;
     }
     
     .btn-guardar{
         display:inline-block;
         width: 41.7%;
-        margin: 16px 2% 0px 6%;
+        margin: 16px 2% 70px 6%;
     }
     .btn-cancelar{
         display:inline-block;
         width: 41.7%;
-        margin: 16px 6% 0px 2%;
+        margin: 16px 6% 70px 2%;
+    }
+    .canvas-horca{
+        margin-top: 10px;
     }
     .btn-capa3{
         display: inline-block;
-        width: 41.7%;
+        width: 41.6%;
+        margin: 0 auto;
     }
     
-    .div-capa3 button:nth-child(1n){
-        margin: 80px 2% 0px 6%;
+    /*.div-capa3 button:nth-child(1n){
+        margin: 0px 2% 0px 6%;
     }
     
     .div-capa3 button:nth-child(2n){
-        margin: 80px 6% 0px 2%;
-    } 
+        margin: 0px 6% 0px 2%;
+    } */
     
 }
 
@@ -174,17 +213,17 @@ body{
     }
     .bt-iniciar{
         width: 22%;
-        margin: 10% auto 38px auto;
+        margin: 10% auto 30px auto;
 
     }
     .bt-nueva-palabra{
         width: 20%;
-        margin: 0px auto 0px auto;
+        margin: 0px auto 70px auto;
     }
 
     .inp-agrega-palabra{
         display: block;
-        width: 23.7%;
+        width: 30%;
         margin: 120px 0 150px 24%;
     }
     
@@ -193,19 +232,21 @@ body{
         margin: 0 0 0 24%;
         color: #495057;
     }
-    
     .btn-guardar{
-        display:inline-block;
+        display: inline;
         width: 23.7%;
-        margin: 16px 2% auto 24%;
     }
-
     .btn-cancelar{
-        display:inline-block;
+        display: inline-block;
         width: 23.7%;
-        margin: 16px 24% auto 2%;
     }
-
+    .div-capa2 button:nth-child(1n){
+        margin: 10px 2% 60px 24%;
+    }
+    
+    .div-capa2 button:nth-child(2n){
+        margin: 10px 0% 60px 2%;
+    } 
     .canvas-horca{
         margin-top: 0px;
     }
@@ -219,22 +260,23 @@ body{
     }
     
     .div-capa3 button:nth-child(1n){
-        margin: 16px 2% 0px 24%;
+        margin: 16px 2% 70px 24%;
     }
     
     .div-capa3 button:nth-child(2n){
-        margin: 16px 24% 0px 2%;
+        margin: 16px 24% 70px 2%;
     } 
 }
 .principal button{
     transition: 0.5s;
 }
 .principal button:hover{
-    transform: scale(1.02);
-    border-radius: 20px;
+    box-shadow: 0px 0px 10px #07c1fa;;
+    text-shadow: 4px 4px 4px #07c1fa;
+    font-size: .8em;
 }
 .principal button:active{
-    transform: translateY(20px);
+    transform: scale(1.05);
 }
 
 
